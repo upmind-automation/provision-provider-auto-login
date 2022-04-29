@@ -63,7 +63,7 @@ if ($result->isError()) {
 /** @var \Upmind\ProvisionProviders\AutoLogin\Data\CreateResult */
 $accountInfo = $result->getData();
 
-// $accountInfo->username; // username/identifier of the created hosting account
+// $accountInfo->username; // username/identifier of the created account
 // ...
 ```
 
