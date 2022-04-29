@@ -1,0 +1,27 @@
+{
+    "name": "upmind/provision-provider-auto-login",
+    "description": "Basic provisioning category/provider for obtaining signed urls to enable auto login to compatible online services",
+    "type": "library",
+    "license": "GPL-3.0-only",
+    "authors": [
+        {
+            "name": "Harry Lewis",
+            "email": "harry@upmind.com"
+        }
+    ],
+    "require": {
+        "upmind/provision-provider-base": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Upmind\\ProvisionProviders\\AutoLogin\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Upmind\\ProvisionProviders\\AutoLogin\\LaravelServiceProvider"
+            ]
+        }
+    }
+}
