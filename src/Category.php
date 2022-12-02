@@ -23,7 +23,8 @@ abstract class Category extends BaseCategory
     {
         return AboutData::create()
             ->setName('Auto Login')
-            ->setDescription('Basic provision category which provides auto-login to compatible services');
+            ->setDescription('Basic provision category which provides auto-login to compatible services')
+            ->setIcon('key');
     }
 
     /**
