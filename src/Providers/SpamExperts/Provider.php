@@ -38,7 +38,8 @@ class Provider extends Category implements ProviderInterface
     {
         return AboutData::create()
             ->setName('SpamExperts')
-            ->setDescription('Create, login to and delete SpamExperts domains');
+            ->setDescription('Create, login to and delete SpamExperts domains')
+            ->setLogoUrl('https://api.upmind.io/images/logos/provision/spamexperts-logo_2x.png');
     }
 
     public function __construct(Configuration $configuration)
