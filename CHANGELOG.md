@@ -2,6 +2,10 @@
 
 All notable changes to the package will be documented in this file.
 
+## v3,0.3 - TBC
+
+- Add Category AboutData icon
+
 ## v3.0.2 - 2022-12-02
 
 Add optional HTTP request/response debug logging to Generic and SpamExperts providers
