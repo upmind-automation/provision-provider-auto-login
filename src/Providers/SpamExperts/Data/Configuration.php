@@ -11,6 +11,7 @@ use Upmind\ProvisionBase\Provider\DataSet\Rules;
  * @property-read string $dashboard_url URL of the SpamExperts dashboard
  * @property-read string $username Admin username
  * @property-read string $password Admin password
+ * @property-read bool|null $debug Whether or not to log all HTTP requests and responses
  */
 class Configuration extends DataSet
 {
@@ -20,6 +21,7 @@ class Configuration extends DataSet
             'dashboard_url' => ['required', 'url', /* 'starts_with:https' */],
             'username' => ['required', 'string'],
             'password' => ['required', 'string'],
+            'debug' => ['boolean'],
         ]);
     }
 }

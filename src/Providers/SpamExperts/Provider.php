@@ -170,6 +170,7 @@ class Provider extends Category implements ProviderInterface
                 $this->configuration->password
             ],
             RequestOptions::HTTP_ERRORS => false,
+            'handler' => $this->getGuzzleHandlerStack(!!$this->configuration->debug)
         ]);
     }
 }
