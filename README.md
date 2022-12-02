@@ -30,42 +30,9 @@ This library makes use of [upmind/provision-provider-base](https://packagist.org
 
 ### Quick-start
 
-See the below example to create a SpamExperts account:
+The easiest way to see this provision category in action and to develop/test changes is to install it in [upmind/provision-workbench](https://github.com/upmind-automation/provision-workbench#readme).
 
-```php
-<?php
-
-use Illuminate\Support\Facades\App;
-use Upmind\ProvisionBase\ProviderFactory;
-
-$factory = App::make(ProviderFactory::class);
-
-$configuration = [
-    'dashboard_url' => 'https://my.spamexperts.com',
-    'username' => 'example',
-    'password' => '{password}',
-];
-$provider = $factory->create('auto-login', 'spam-experts', $configuration);
-
-$createParameters = [
-    'service_identifier' => 'example.com',
-    'email' => 'harry@upmind.com',
-    'package_name' => 'incoming,outgoing',
-];
-$function = $provider->makeJob('create', $createParameters);
-
-$result = $function->execute();
-
-if ($result->isError()) {
-    throw new RuntimeException($result->getMessage(), 0, $result->getException());
-}
-
-/** @var \Upmind\ProvisionProviders\AutoLogin\Data\CreateResult */
-$accountInfo = $result->getData();
-
-// $accountInfo->username; // username/identifier of the created account
-// ...
-```
+Alternatively you can start using it for your business immediately with [Upmind.com](https://upmind.com/start) - the ultimate web hosting billing and management solution.
 
 ## Supported Providers
 
