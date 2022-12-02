@@ -2,7 +2,7 @@
 
 All notable changes to the package will be documented in this file.
 
-## v3,0.3 - 2022-12-02
+## v3.0.3 - 2022-12-02
 
 Add Category icon and SpamExperts Provider logo
 
