@@ -14,6 +14,7 @@ use Upmind\ProvisionProviders\AutoLogin\Data\CreateResult;
 use Upmind\ProvisionProviders\AutoLogin\Data\LoginParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\LoginResult;
 use Upmind\ProvisionProviders\AutoLogin\Data\TerminateParams;
+use Upmind\ProvisionProviders\AutoLogin\Providers\Example\Data\Configuration;
 
 /**
  * Empty provider for demonstration purposes.
