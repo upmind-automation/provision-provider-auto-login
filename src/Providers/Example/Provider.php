@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Upmind\ProvisionProviders\AutoLogin\Providers\Example;
 
 use GuzzleHttp\Client;
-use Upmind\ProvisionBase\Provider\BaseCategory;
+use Upmind\ProvisionBase\Provider\Contract\ProviderInterface;
 use Upmind\ProvisionBase\Provider\DataSet\AboutData;
 use Upmind\ProvisionBase\Provider\DataSet\ResultData;
+use Upmind\ProvisionProviders\AutoLogin\Category;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateResult;
 use Upmind\ProvisionProviders\AutoLogin\Data\LoginParams;
@@ -17,7 +18,7 @@ use Upmind\ProvisionProviders\AutoLogin\Data\TerminateParams;
 /**
  * Empty provider for demonstration purposes.
  */
-abstract class Category extends BaseCategory
+class Provider extends Category implements ProviderInterface
 {
     protected Configuration $configuration;
     protected Client $client;
