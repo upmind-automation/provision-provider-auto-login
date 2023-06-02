@@ -32,9 +32,10 @@ class Provider extends Category implements ProviderInterface
     {
         return AboutData::create()
             ->setName('Generic Login')
-        ->setDescription(
-            'A highly-configurable generic auto login provider for services which use bearer token auth'
-        );
+            ->setLogoUrl('https://api.upmind.io/images/logos/provision/generic-logo.png')
+            ->setDescription(
+                'A highly-configurable generic auto login provider for services which use bearer token auth'
+            );
     }
 
     public function __construct(Configuration $configuration)
