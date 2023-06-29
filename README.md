@@ -1,4 +1,4 @@
-# Upmind Provision Providers - Auto Login
+# [Upmind Provision Providers](https://github.com/upmind-automation) - Auto Login
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/upmind/provision-provider-auto-login.svg?style=flat-square)](https://packagist.org/packages/upmind/provision-provider-auto-login)
 
