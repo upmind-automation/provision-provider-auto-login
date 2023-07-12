@@ -13,11 +13,10 @@ use Upmind\ProvisionBase\Provider\DataSet\ResultData;
 use Upmind\ProvisionProviders\AutoLogin\Category;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateResult;
-use Upmind\ProvisionProviders\AutoLogin\Data\LoginParams;
+use Upmind\ProvisionProviders\AutoLogin\Data\AccountIdentifierParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\LoginResult;
-use Upmind\ProvisionProviders\AutoLogin\Data\TerminateParams;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Generic\Data\Configuration;
-use Upmind\ProvisionProviders\AutoLogin\Providers\Generic\ResponseHandlers\TerminateResponseHandler;
+use Upmind\ProvisionProviders\AutoLogin\Providers\Generic\ResponseHandlers\OperationResponseHandler;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Generic\ResponseHandlers\UrlResponseHandler;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Generic\ResponseHandlers\UsernameResponseHandler;
 
@@ -43,7 +42,7 @@ class Provider extends Category implements ProviderInterface
         $this->configuration = $configuration;
     }
 
-    public function login(LoginParams $params): LoginResult
+    public function login(AccountIdentifierParams $params): LoginResult
     {
         $method = strtoupper($this->configuration->login_endpoint_http_method);
         $endpointUrl = $this->configuration->login_endpoint_url;
@@ -83,12 +82,6 @@ class Provider extends Category implements ProviderInterface
 
         $options = [];
 
-        if ($this->configuration->access_token) {
-            $options[RequestOptions::HEADERS] = [
-                'Authorization' => sprintf('Bearer %s', $this->configuration->access_token),
-            ];
-        }
-
         if ($method === 'GET') {
             $options[RequestOptions::QUERY] = $requestParams;
         } else {
@@ -104,7 +97,61 @@ class Provider extends Category implements ProviderInterface
             ->setPackageIdentifier($handler->getPackageIdentifier() ?? $params->package_identifier);
     }
 
-    public function terminate(TerminateParams $params): ResultData
+    public function suspend(AccountIdentifierParams $params): ResultData
+    {
+        if (!$this->configuration->has_suspend) {
+            return $this->errorResult('No suspend endpoint set in this configuration');
+        }
+
+        $method = strtoupper($this->configuration->suspend_endpoint_http_method);
+        $endpointUrl = $this->configuration->suspend_endpoint_url;
+
+        $requestParams = $params->toArray();
+        $requestParams = array_merge($requestParams, Arr::pull($requestParams, 'extra') ?? []); // merge extra params
+
+        $options = [];
+
+        if ($method === 'GET') {
+            $options[RequestOptions::QUERY] = $requestParams;
+        } else {
+            $options[RequestOptions::FORM_PARAMS] = $requestParams;
+        }
+
+        $response = $this->client()->request($method, $endpointUrl, $options);
+        $handler = new OperationResponseHandler($response);
+        $handler->assertOperationSuccess('suspend');
+
+        return ResultData::create()->setMessage('Account suspended');
+    }
+
+    public function unsuspend(AccountIdentifierParams $params): ResultData
+    {
+        if (!$this->configuration->has_suspend) {
+            return $this->errorResult('No unsuspend endpoint set in this configuration');
+        }
+
+        $method = strtoupper($this->configuration->unsuspend_endpoint_http_method);
+        $endpointUrl = $this->configuration->unsuspend_endpoint_url;
+
+        $requestParams = $params->toArray();
+        $requestParams = array_merge($requestParams, Arr::pull($requestParams, 'extra') ?? []); // merge extra params
+
+        $options = [];
+
+        if ($method === 'GET') {
+            $options[RequestOptions::QUERY] = $requestParams;
+        } else {
+            $options[RequestOptions::FORM_PARAMS] = $requestParams;
+        }
+
+        $response = $this->client()->request($method, $endpointUrl, $options);
+        $handler = new OperationResponseHandler($response);
+        $handler->assertOperationSuccess('suspend');
+
+        return ResultData::create()->setMessage('Account unsuspended');
+    }
+
+    public function terminate(AccountIdentifierParams $params): ResultData
     {
         if (!$this->configuration->has_terminate) {
             return $this->errorResult('No terminate endpoint set in this configuration');
@@ -114,15 +161,9 @@ class Provider extends Category implements ProviderInterface
         $endpointUrl = $this->configuration->terminate_endpoint_url;
 
         $requestParams = $params->toArray();
-        $requestParams = array_merge($requestParams, Arr::pull($requestParams, 'extra', [])); // merge extra params
+        $requestParams = array_merge($requestParams, Arr::pull($requestParams, 'extra') ?? []); // merge extra params
 
         $options = [];
-
-        if ($this->configuration->access_token) {
-            $options[RequestOptions::HEADERS] = [
-                'Authorization' => sprintf('Bearer %s', $this->configuration->access_token),
-            ];
-        }
 
         if ($method === 'GET') {
             $options[RequestOptions::QUERY] = $requestParams;
@@ -131,17 +172,25 @@ class Provider extends Category implements ProviderInterface
         }
 
         $response = $this->client()->request($method, $endpointUrl, $options);
-        $handler = new TerminateResponseHandler($response);
-        $handler->assertSuccess();
+        $handler = new OperationResponseHandler($response);
+        $handler->assertOperationSuccess('terminate');
 
-        return ResultData::create();
+        return ResultData::create()->setMessage('Account terminated');
     }
 
     protected function client(): Client
     {
-        return new Client([
+        $options = [
             RequestOptions::HTTP_ERRORS => false,
             'handler' => $this->getGuzzleHandlerStack(!!$this->configuration->debug),
-        ]);
+        ];
+
+        if ($this->configuration->access_token) {
+            $options[RequestOptions::HEADERS] = [
+                'Authorization' => sprintf('Bearer %s', $this->configuration->access_token),
+            ];
+        }
+
+        return new Client($options);
     }
 }
