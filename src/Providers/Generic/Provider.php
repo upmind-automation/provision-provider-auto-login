@@ -9,11 +9,11 @@ use GuzzleHttp\RequestOptions;
 use Illuminate\Support\Arr;
 use Upmind\ProvisionBase\Provider\Contract\ProviderInterface;
 use Upmind\ProvisionBase\Provider\DataSet\AboutData;
-use Upmind\ProvisionBase\Provider\DataSet\ResultData;
 use Upmind\ProvisionProviders\AutoLogin\Category;
+use Upmind\ProvisionProviders\AutoLogin\Data\AccountIdentifierParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateResult;
-use Upmind\ProvisionProviders\AutoLogin\Data\AccountIdentifierParams;
+use Upmind\ProvisionProviders\AutoLogin\Data\EmptyResult;
 use Upmind\ProvisionProviders\AutoLogin\Data\LoginResult;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Generic\Data\Configuration;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Generic\ResponseHandlers\OperationResponseHandler;
@@ -97,7 +97,7 @@ class Provider extends Category implements ProviderInterface
             ->setPackageIdentifier($handler->getPackageIdentifier() ?? $params->package_identifier);
     }
 
-    public function suspend(AccountIdentifierParams $params): ResultData
+    public function suspend(AccountIdentifierParams $params): EmptyResult
     {
         if (!$this->configuration->has_suspend) {
             return $this->errorResult('No suspend endpoint set in this configuration');
@@ -121,10 +121,10 @@ class Provider extends Category implements ProviderInterface
         $handler = new OperationResponseHandler($response);
         $handler->assertOperationSuccess('suspend');
 
-        return ResultData::create()->setMessage('Account suspended');
+        return EmptyResult::create()->setMessage('Account suspended');
     }
 
-    public function unsuspend(AccountIdentifierParams $params): ResultData
+    public function unsuspend(AccountIdentifierParams $params): EmptyResult
     {
         if (!$this->configuration->has_suspend) {
             return $this->errorResult('No unsuspend endpoint set in this configuration');
@@ -148,10 +148,10 @@ class Provider extends Category implements ProviderInterface
         $handler = new OperationResponseHandler($response);
         $handler->assertOperationSuccess('suspend');
 
-        return ResultData::create()->setMessage('Account unsuspended');
+        return EmptyResult::create()->setMessage('Account unsuspended');
     }
 
-    public function terminate(AccountIdentifierParams $params): ResultData
+    public function terminate(AccountIdentifierParams $params): EmptyResult
     {
         if (!$this->configuration->has_terminate) {
             return $this->errorResult('No terminate endpoint set in this configuration');
@@ -175,7 +175,7 @@ class Provider extends Category implements ProviderInterface
         $handler = new OperationResponseHandler($response);
         $handler->assertOperationSuccess('terminate');
 
-        return ResultData::create()->setMessage('Account terminated');
+        return EmptyResult::create()->setMessage('Account terminated');
     }
 
     protected function client(): Client

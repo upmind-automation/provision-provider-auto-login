@@ -7,11 +7,11 @@ namespace Upmind\ProvisionProviders\AutoLogin\Providers\Example;
 use GuzzleHttp\Client;
 use Upmind\ProvisionBase\Provider\Contract\ProviderInterface;
 use Upmind\ProvisionBase\Provider\DataSet\AboutData;
-use Upmind\ProvisionBase\Provider\DataSet\ResultData;
 use Upmind\ProvisionProviders\AutoLogin\Category;
+use Upmind\ProvisionProviders\AutoLogin\Data\AccountIdentifierParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateResult;
-use Upmind\ProvisionProviders\AutoLogin\Data\AccountIdentifierParams;
+use Upmind\ProvisionProviders\AutoLogin\Data\EmptyResult;
 use Upmind\ProvisionProviders\AutoLogin\Data\LoginResult;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Example\Data\Configuration;
 
@@ -62,27 +62,27 @@ class Provider extends Category implements ProviderInterface
     /**
      * @inheritDoc
      */
-    public function suspend(AccountIdentifierParams $params): ResultData
+    public function suspend(AccountIdentifierParams $params): EmptyResult
     {
-        return ResultData::create()
+        return EmptyResult::create()
             ->setMessage('Account suspended');
     }
 
     /**
      * @inheritDoc
      */
-    public function unsuspend(AccountIdentifierParams $params): ResultData
+    public function unsuspend(AccountIdentifierParams $params): EmptyResult
     {
-        return ResultData::create()
+        return EmptyResult::create()
             ->setMessage('Account unsuspended');
     }
 
     /**
      * @inheritDoc
      */
-    public function terminate(AccountIdentifierParams $params): ResultData
+    public function terminate(AccountIdentifierParams $params): EmptyResult
     {
-        return ResultData::create()
+        return EmptyResult::create()
             ->setMessage('Account terminated');
     }
 

@@ -6,10 +6,10 @@ namespace Upmind\ProvisionProviders\AutoLogin;
 
 use Upmind\ProvisionBase\Provider\BaseCategory;
 use Upmind\ProvisionBase\Provider\DataSet\AboutData;
-use Upmind\ProvisionBase\Provider\DataSet\ResultData;
 use Upmind\ProvisionProviders\AutoLogin\Data\AccountIdentifierParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateResult;
+use Upmind\ProvisionProviders\AutoLogin\Data\EmptyResult;
 use Upmind\ProvisionProviders\AutoLogin\Data\LoginResult;
 
 /**
@@ -41,15 +41,15 @@ abstract class Category extends BaseCategory
     /**
      * Suspend an account for this service.
      */
-    abstract public function suspend(AccountIdentifierParams $params): ResultData;
+    abstract public function suspend(AccountIdentifierParams $params): EmptyResult;
 
     /**
      * Unsuspend an account for this service.
      */
-    abstract public function unsuspend(AccountIdentifierParams $params): ResultData;
+    abstract public function unsuspend(AccountIdentifierParams $params): EmptyResult;
 
     /**
      * Permanently delete an account for this service.
      */
-    abstract public function terminate(AccountIdentifierParams $params): ResultData;
+    abstract public function terminate(AccountIdentifierParams $params): EmptyResult;
 }

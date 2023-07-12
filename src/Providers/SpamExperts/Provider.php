@@ -6,19 +6,16 @@ namespace Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Upmind\ProvisionBase\Provider\Contract\ProviderInterface;
 use Upmind\ProvisionBase\Provider\DataSet\AboutData;
-use Upmind\ProvisionBase\Provider\DataSet\ResultData;
 use Upmind\ProvisionProviders\AutoLogin\Category;
+use Upmind\ProvisionProviders\AutoLogin\Data\AccountIdentifierParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateResult;
-use Upmind\ProvisionProviders\AutoLogin\Data\AccountIdentifierParams;
+use Upmind\ProvisionProviders\AutoLogin\Data\EmptyResult;
 use Upmind\ProvisionProviders\AutoLogin\Data\LoginResult;
 use Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\Data\Configuration;
-use Upmind\ProvisionProviders\AutoLogin\Providers\Generic\ResponseHandlers\UrlResponseHandler;
-use Upmind\ProvisionProviders\AutoLogin\Providers\Generic\ResponseHandlers\UsernameResponseHandler;
 use Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\ResponseHandlers\AddDomainResponseHandler;
 use Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\ResponseHandlers\AuthTicketResponseHandler;
 use Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\ResponseHandlers\GetDomainProductsResponseHandler;
@@ -73,23 +70,23 @@ class Provider extends Category implements ProviderInterface
             ->setUrl($this->getLoginUrl($domainName));
     }
 
-    public function suspend(AccountIdentifierParams $params): ResultData
+    public function suspend(AccountIdentifierParams $params): EmptyResult
     {
         throw $this->errorResult('Operation not supported');
     }
 
-    public function unsuspend(AccountIdentifierParams $params): ResultData
+    public function unsuspend(AccountIdentifierParams $params): EmptyResult
     {
         throw $this->errorResult('Operation not supported');
     }
 
-    public function terminate(AccountIdentifierParams $params): ResultData
+    public function terminate(AccountIdentifierParams $params): EmptyResult
     {
         $domainName = $params->service_identifier ?: $params->username;
 
         $this->removeDomain($domainName);
 
-        return ResultData::create();
+        return EmptyResult::create();
     }
 
     protected function createDomain(string $domain): void
