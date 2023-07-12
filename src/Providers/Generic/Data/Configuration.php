@@ -31,18 +31,18 @@ class Configuration extends DataSet
         return new Rules([
             'access_token' => ['nullable', 'string'],
             'login_endpoint_http_method' => ['required', 'string', 'in:post,put,patch,get'],
-            'login_endpoint_url' => ['required', 'url', /* 'starts_with:https' */],
+            'login_endpoint_url' => ['required', 'url'],
             'has_create' => ['boolean'],
             'create_endpoint_http_method' => ['required_if:has_create,1', 'string', 'in:post,put,patch,get'],
-            'create_endpoint_url' => ['required_if:has_create,1', 'url', /* 'starts_with:https' */],
+            'create_endpoint_url' => ['required_if:has_create,1', 'url'],
             'has_suspend' => ['boolean'],
             'suspend_endpoint_http_method' => ['required_if:has_suspend,1', 'string', 'in:post,put,patch,get,delete'],
-            'suspend_endpoint_url' => ['required_if:has_suspend,1', 'url', /* 'starts_with:https' */],
+            'suspend_endpoint_url' => ['required_if:has_suspend,1', 'url'],
             'unsuspend_endpoint_http_method' => ['required_if:has_suspend,1', 'string', 'in:post,put,patch,get,delete'],
-            'unsuspend_endpoint_url' => ['required_if:has_suspend,1', 'url', /* 'starts_with:https' */],
+            'unsuspend_endpoint_url' => ['required_if:has_suspend,1', 'url'],
             'has_terminate' => ['boolean'],
             'terminate_endpoint_http_method' => ['required_if:has_terminate,1', 'string', 'in:post,put,patch,get,delete'],
-            'terminate_endpoint_url' => ['required_if:has_terminate,1', 'url', /* 'starts_with:https' */],
+            'terminate_endpoint_url' => ['required_if:has_terminate,1', 'url'],
             'debug' => ['boolean'],
         ]);
     }
