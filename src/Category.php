@@ -39,17 +39,17 @@ abstract class Category extends BaseCategory
     abstract public function login(AccountIdentifierParams $params): LoginResult;
 
     /**
-     * Suspend an account for this service.
+     * Suspend an account.
      */
     abstract public function suspend(AccountIdentifierParams $params): EmptyResult;
 
     /**
-     * Unsuspend an account for this service.
+     * Unsuspend an account.
      */
     abstract public function unsuspend(AccountIdentifierParams $params): EmptyResult;
 
     /**
-     * Permanently delete an account for this service.
+     * Permanently delete an account.
      */
     abstract public function terminate(AccountIdentifierParams $params): EmptyResult;
 }

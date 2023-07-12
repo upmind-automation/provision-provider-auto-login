@@ -9,9 +9,6 @@ This provision category contains functions to facilitate basic online service ac
   - [Quick-start](#quick-start)
 - [Supported Providers](#supported-providers)
 - [Functions](#functions)
-  - [create()](#create)
-  - [login()](#login)
-  - [terminate()](#terminate)
 - [Changelog](#changelog)
 - [Contributing](#contributing)
 - [Credits](#credits)
@@ -44,17 +41,13 @@ The following providers are currently implemented:
 
 ## Functions
 
-### create()
-
-Creates an account and returns the `username` which can be used to identify the account in subsequent requests, plus other account information.
-
-### login()
-
-Obtain a signed login URL for the service that the system client can redirect to.
-
-### terminate()
-
-Delete an account for this service.
+| Function | Parameters | Return Data | Description |
+|---|---|---|---|
+| login() | [_AccountIdentifierParams_](src/Data/AccountIdentifierParams.php) | [_LoginResult_](src/Data/LoginResult.php) | Obtain a signed login URL for the service that the system client can redirect to |
+| create() | [_CreateParams_](src/Data/CreateParams.php) | [_CreateResult_](src/Data/CreateResult.php) | Creates an account and returns the `username` which can be used to identify the account in subsequent requests, plus other account information |
+| suspend() | [_AccountIdentifierParams_](src/Data/AccountIdentifierParams.php) | [_EmptyResult_](src/Data/EmptyResult.php) | Suspend an account |
+| unsuspend() | [_AccountIdentifierParams_](src/Data/AccountIdentifierParams.php) | [_EmptyResult_](src/Data/EmptyResult.php) | Unsuspend an account |
+| terminate() | [_AccountIdentifierParams_](src/Data/AccountIdentifierParams.php) | [_EmptyResult_](src/Data/EmptyResult.php) | Permanently delete an account |
 
 ## Changelog
 
