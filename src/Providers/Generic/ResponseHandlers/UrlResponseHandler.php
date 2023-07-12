@@ -72,7 +72,8 @@ class UrlResponseHandler extends AbstractHandler
 
         return !empty($components['scheme'])
             && !empty($components['host'])
-            && (!empty($components['path'])
+            && (
+                !empty($components['path'])
                 || !empty($components['query'])
                 || !empty($components['fragment'])
             );
