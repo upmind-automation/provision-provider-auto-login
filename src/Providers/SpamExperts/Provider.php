@@ -14,9 +14,8 @@ use Upmind\ProvisionBase\Provider\DataSet\ResultData;
 use Upmind\ProvisionProviders\AutoLogin\Category;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateResult;
-use Upmind\ProvisionProviders\AutoLogin\Data\LoginParams;
+use Upmind\ProvisionProviders\AutoLogin\Data\AccountIdentifierParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\LoginResult;
-use Upmind\ProvisionProviders\AutoLogin\Data\TerminateParams;
 use Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\Data\Configuration;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Generic\ResponseHandlers\UrlResponseHandler;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Generic\ResponseHandlers\UsernameResponseHandler;
@@ -66,7 +65,7 @@ class Provider extends Category implements ProviderInterface
             ->setPackageIdentifier(implode(',', $this->getDomainProducts($domainName)));
     }
 
-    public function login(LoginParams $params): LoginResult
+    public function login(AccountIdentifierParams $params): LoginResult
     {
         $domainName = $params->service_identifier ?: $params->username;
 
@@ -74,7 +73,17 @@ class Provider extends Category implements ProviderInterface
             ->setUrl($this->getLoginUrl($domainName));
     }
 
-    public function terminate(TerminateParams $params): ResultData
+    public function suspend(AccountIdentifierParams $params): ResultData
+    {
+        throw $this->errorResult('Operation not supported');
+    }
+
+    public function unsuspend(AccountIdentifierParams $params): ResultData
+    {
+        throw $this->errorResult('Operation not supported');
+    }
+
+    public function terminate(AccountIdentifierParams $params): ResultData
     {
         $domainName = $params->service_identifier ?: $params->username;
 
