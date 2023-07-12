@@ -7,11 +7,10 @@ namespace Upmind\ProvisionProviders\AutoLogin;
 use Upmind\ProvisionBase\Provider\BaseCategory;
 use Upmind\ProvisionBase\Provider\DataSet\AboutData;
 use Upmind\ProvisionBase\Provider\DataSet\ResultData;
+use Upmind\ProvisionProviders\AutoLogin\Data\AccountIdentifierParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\CreateResult;
-use Upmind\ProvisionProviders\AutoLogin\Data\LoginParams;
 use Upmind\ProvisionProviders\AutoLogin\Data\LoginResult;
-use Upmind\ProvisionProviders\AutoLogin\Data\TerminateParams;
 
 /**
  * This provision category contains functions to facilitate basic online service
@@ -37,10 +36,20 @@ abstract class Category extends BaseCategory
     /**
      * Obtain a signed login URL for the service that the system client can redirect to.
      */
-    abstract public function login(LoginParams $params): LoginResult;
+    abstract public function login(AccountIdentifierParams $params): LoginResult;
 
     /**
-     * Delete an account for this service.
+     * Suspend an account for this service.
      */
-    abstract public function terminate(TerminateParams $params): ResultData;
+    abstract public function suspend(AccountIdentifierParams $params): ResultData;
+
+    /**
+     * Unsuspend an account for this service.
+     */
+    abstract public function unsuspend(AccountIdentifierParams $params): ResultData;
+
+    /**
+     * Permanently delete an account for this service.
+     */
+    abstract public function terminate(AccountIdentifierParams $params): ResultData;
 }
