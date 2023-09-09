@@ -9,6 +9,7 @@ All notable changes to the package will be documented in this file.
   - Replace usage of ResultData with EmptyResult
 - Add `suspend()` and `unsuspend()` functions
 - Add Example provider
+- Add optional `customer_name` and `promo_codes` to CreateParams
 
 ## [v3.0.3](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v3.0.3) - 2022-12-02
 
