@@ -16,7 +16,6 @@ use Upmind\ProvisionProviders\AutoLogin\Data\LoginResult;
 use Upmind\ProvisionProviders\AutoLogin\Data\AccountIdentifierParams;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Marketgoo\Data\Configuration;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Marketgoo\ResponseHandlers\CreateAccountResponseHandler;
-use Upmind\ProvisionProviders\AutoLogin\Providers\Marketgoo\ResponseHandlers\ProductListResponseHandler;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Marketgoo\ResponseHandlers\ResponseHandler;
 
 class Provider extends Category implements ProviderInterface
@@ -44,9 +43,12 @@ class Provider extends Category implements ProviderInterface
         $domainName = $params->service_identifier;
         $productKey = $params->package_identifier;
         $email = $params->email;
-        $name = substr($email, 0, strrpos($email, '@'));
+        $name = $params->customer_name ?: substr($email, 0, strrpos($email, '@'));
+        $promoCode = is_array($params->promo_codes)
+            ? head($params->promo_codes)
+            : $params->promo_codes;
 
-        $accountId = $this->createAccount($domainName, $productKey, $email, $name);
+        $accountId = $this->createAccount($domainName, $productKey, $email, $name, $promoCode);
 
         return CreateResult::create()
             ->setUsername($accountId)
@@ -96,7 +98,8 @@ class Provider extends Category implements ProviderInterface
         string $domainName,
         string $productKey,
         string $email,
-        string $name
+        string $name,
+        ?string $promoCode = null
     ): string {
         $response = $this->client()->post('accounts', [
             RequestOptions::FORM_PARAMS => [
@@ -107,6 +110,7 @@ class Provider extends Category implements ProviderInterface
                         'product' => $productKey,
                         'name' => $name,
                         'email' => $email,
+                        'promo' => $promoCode,
                     ],
                 ],
             ],
