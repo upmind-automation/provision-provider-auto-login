@@ -6,6 +6,7 @@ namespace Upmind\ProvisionProviders\AutoLogin\Providers\Marketgoo;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
+use Upmind\ProvisionBase\Helper;
 use Upmind\ProvisionProviders\AutoLogin\Category;
 use Upmind\ProvisionBase\Provider\Contract\ProviderInterface;
 use Upmind\ProvisionBase\Provider\DataSet\AboutData;
@@ -112,6 +113,7 @@ class Provider extends Category implements ProviderInterface
                         'name' => $name,
                         'email' => $email,
                         'promo' => $promoCode,
+                        'password' => Helper::generateStrictPassword(15, true, true, true)
                     ],
                 ],
             ],
