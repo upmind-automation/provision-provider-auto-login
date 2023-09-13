@@ -37,7 +37,7 @@ Alternatively you can start using it for your business immediately with [Upmind.
 
 The following providers are currently implemented:
   - Generic (a generic highly configurable provider)
-  - [SpamExperts](https://documentation.n-able.com/spamexperts/userguide/Content/Integration/software-api.htm)
+  - [SpamExperts](https://api.antispamcloud.com/api/help.php)
   - [marketgoo](https://marketgoo.docs.apiary.io/)
 
 ## Functions
