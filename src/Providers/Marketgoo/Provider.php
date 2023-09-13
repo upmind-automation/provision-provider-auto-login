@@ -17,6 +17,7 @@ use Upmind\ProvisionProviders\AutoLogin\Data\AccountIdentifierParams;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Marketgoo\Data\Configuration;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Marketgoo\ResponseHandlers\CreateAccountResponseHandler;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Marketgoo\ResponseHandlers\ResponseHandler;
+use Upmind\ProvisionProviders\AutoLogin\Providers\Marketgoo\ResponseHandlers\LoginResponseHandler;
 
 class Provider extends Category implements ProviderInterface
 {
@@ -122,7 +123,10 @@ class Provider extends Category implements ProviderInterface
 
     protected function getLoginUrl(string $username): string
     {
-        return $this->configuration->public_domain . sprintf('/login?uuid=%s', $username);
+        // get 5-minute ttl sso link
+        $response = $this->client()->get(sprintf('accounts/%s/login?expires=%s', $username, 5));
+        $handler = new LoginResponseHandler($response);
+        return $handler->getLoginUrl();
     }
 
     private function suspendAccount(string $accountId): void
