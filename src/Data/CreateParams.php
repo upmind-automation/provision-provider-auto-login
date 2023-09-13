@@ -27,7 +27,7 @@ class CreateParams extends DataSet
             'email' => ['nullable', 'email'],
             'customer_name' => ['nullable', 'string'],
             'promo_codes' => ['nullable', 'array'],
-            'promo_codes' => ['string'],
+            'promo_codes.*' => ['string'],
             'extra' => ['nullable', 'array'],
         ]);
     }
