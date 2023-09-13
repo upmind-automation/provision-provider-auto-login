@@ -32,7 +32,7 @@ class CreateAccountResponseHandler extends ResponseHandler
             return $data['id'];
         } catch (CannotParseResponse $e) {
             throw (new OperationFailed($e->getMessage(), 0, $e))
-                ->withDebug([
+                ->withData([
                     'http_code' => $this->response->getStatusCode(),
                     'content_type' => $this->response->getHeaderLine('Content-Type'),
                     'body' => $this->getBody(),
