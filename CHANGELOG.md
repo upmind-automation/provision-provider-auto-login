@@ -2,7 +2,7 @@
 
 All notable changes to the package will be documented in this file.
 
-## v4.0 - TBC
+## [v4.0](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v4.0) - 2023-09-13
 
 - Refactor Category function parameter + return datasets
   - Delete LoginParams and TerminateParams in favour of AccountIdentifierParams with optional `extra` array
@@ -10,6 +10,7 @@ All notable changes to the package will be documented in this file.
 - Add `suspend()` and `unsuspend()` functions
 - Add Example provider
 - Add optional `customer_name` and `promo_codes` to CreateParams
+- Add marketgoo provider
 
 ## [v3.0.3](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v3.0.3) - 2022-12-02
 
