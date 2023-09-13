@@ -6,6 +6,7 @@ namespace Upmind\ProvisionProviders\AutoLogin\Providers\Marketgoo;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
+use Illuminate\Support\Str;
 use Upmind\ProvisionBase\Helper;
 use Upmind\ProvisionProviders\AutoLogin\Category;
 use Upmind\ProvisionBase\Provider\Contract\ProviderInterface;
@@ -84,8 +85,10 @@ class Provider extends Category implements ProviderInterface
 
     protected function client(): Client
     {
+        $apiUrl = Str::start($this->configuration->api_url, 'https://');
+
         return new Client([
-            'base_uri' => rtrim($this->configuration->internal_domain, '/') . '/api/',
+            'base_uri' => rtrim($apiUrl, '/') . '/api/',
             'handler' => $this->getGuzzleHandlerStack(!!$this->configuration->debug),
             RequestOptions::HTTP_ERRORS => false,
             RequestOptions::HEADERS => [
