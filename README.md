@@ -61,6 +61,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 ## Credits
 
  - [Harry Lewis](https://github.com/uphlewis)
+ - [Óscar J. Baeza](https://github.com/ojbaeza)
  - [All Contributors](../../contributors)
 
 ## License
