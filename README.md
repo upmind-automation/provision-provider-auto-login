@@ -38,7 +38,6 @@ Alternatively you can start using it for your business immediately with [Upmind.
 The following providers are currently implemented:
   - Generic (a generic highly configurable provider)
   - [SpamExperts](https://api.antispamcloud.com/api/help.php)
-  - [marketgoo](https://marketgoo.docs.apiary.io/)
 
 ## Functions
 
@@ -61,7 +60,6 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 ## Credits
 
  - [Harry Lewis](https://github.com/uphlewis)
- - [Óscar J. Baeza](https://github.com/ojbaeza)
  - [All Contributors](../../contributors)
 
 ## License

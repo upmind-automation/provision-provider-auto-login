@@ -2,6 +2,10 @@
 
 All notable changes to the package will be documented in this file.
 
+## [v5.0](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.0) - 2023-09-19
+
+- Move Marketgoo provider to [upmind/provision-provider-seo](https://github.com/upmind-automation/provision-provider-seo)
+
 ## [v4.0](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v4.0) - 2023-09-13
 
 - Refactor Category function parameter + return datasets
