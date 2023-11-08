@@ -65,7 +65,7 @@ class Provider extends Category implements ProviderInterface
         $handler = new UrlResponseHandler($response);
 
         return LoginResult::create()
-            ->setUrl($handler->getUrl(null));
+            ->setUrl($handler->getUrl());
     }
 
     public function create(CreateParams $params): CreateResult
