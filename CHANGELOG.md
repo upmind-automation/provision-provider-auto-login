@@ -2,6 +2,10 @@
 
 All notable changes to the package will be documented in this file.
 
+## [v5.1.1](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1) - 2023-11-08
+
+- Fix Generic/Provider::login() return URL property
+
 ## [v5.1](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1) - 2023-11-03
 
 - Update AccountIdentifierParams add optional package_identifier
