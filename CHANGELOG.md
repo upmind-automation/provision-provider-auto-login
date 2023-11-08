@@ -2,7 +2,11 @@
 
 All notable changes to the package will be documented in this file.
 
-## [v5.1.1](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1) - 2023-11-08
+## [v5.1.2](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1.2) - 2023-11-08
+
+- Update ResponseHandlers/AbstractHandler::assertSuccess() to attempt to extract an error message
+
+## [v5.1.1](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1.1) - 2023-11-08
 
 - Fix Generic/Provider::login() return URL property
 
