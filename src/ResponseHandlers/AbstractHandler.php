@@ -70,14 +70,16 @@ abstract class AbstractHandler
     /**
      * @throws CannotParseResponse If response is an error or body is invalid
      */
-    protected function parse(): void
+    protected function parse(bool $assertSuccess = true): void
     {
         if (isset($this->data)) {
             // already parsed
             return;
         }
 
-        $this->assertSuccess();
+        if ($assertSuccess) {
+            $this->assertSuccess();
+        }
 
         if ($this->bodyIsJson()) {
             $this->parseJson();
@@ -175,13 +177,20 @@ abstract class AbstractHandler
     public function assertSuccess(): void
     {
         if ($this->isError()) {
-            throw new CannotParseResponse(
-                sprintf(
-                    'Service error: %s %s',
-                    $this->response->getStatusCode(),
-                    $this->response->getReasonPhrase()
-                )
-            );
+            $errorMessage = sprintf('%s %s', $this->response->getStatusCode(), $this->response->getReasonPhrase());
+
+            try {
+                $this->parse(false);
+
+                $responseError = $this->getData('error_message')
+                    ?? $this->getData('message')
+                    ?? $this->getData('error');
+                $errorMessage = $responseError ?: $errorMessage;
+            } catch (\Throwable $e) {
+                // ignore
+            }
+
+            throw new CannotParseResponse(sprintf('Service error: %s', $errorMessage));
         }
     }
 }
