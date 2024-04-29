@@ -48,6 +48,10 @@ class Provider extends Category implements ProviderInterface
         $domainName = $params->service_identifier;
         $package = $params->package_identifier;
 
+        if (empty($domainName)) {
+            throw $this->errorResult('Domain name is required as service identifier');
+        }
+
         if (empty($package)) {
             // default to all available products
             $package = implode(',', $this->getAvailableProducts());
