@@ -22,7 +22,6 @@ use Upmind\ProvisionBase\Provider\DataSet\Rules;
  * @property-read boolean $has_terminate Whether or not this configuration has a terminate endpoint
  * @property-read string|null $terminate_endpoint_url Endpoint which terminates a service account
  * @property-read string|null $terminate_endpoint_http_method HTTP method to use for the terminate endpoint
- * @property-read bool|null $debug Whether or not to log all HTTP requests and responses
  */
 class Configuration extends DataSet
 {
@@ -43,7 +42,6 @@ class Configuration extends DataSet
             'has_terminate' => ['boolean'],
             'terminate_endpoint_http_method' => ['required_if:has_terminate,1', 'string', 'in:post,put,patch,get,delete'],
             'terminate_endpoint_url' => ['required_if:has_terminate,1', 'url'],
-            'debug' => ['boolean'],
         ]);
     }
 }
