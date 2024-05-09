@@ -26,21 +26,28 @@ class AuthTicketResponseHandler extends ResponseHandler
             $this->assertSuccess();
 
             $ticket = $this->getBody();
-
-            if (!$this->isValidTicket($ticket)) {
-                throw new CannotParseResponse('Unable to parse valid auth ticket from service response');
-            }
-
-            return $ticket;
         } catch (CannotParseResponse $e) {
             throw (new ResponseMissingAuthTicket($e->getMessage(), 0, $e))
                 ->withDebug([
                     'http_code' => $this->response->getStatusCode(),
                     'content_type' => $this->response->getHeaderLine('Content-Type'),
                     'body' => $this->getBody(),
-                    'ticket' => $ticket ?? null,
+                    'ticket' => null, // Ticket should not be set at this point.
                 ]);
         }
+
+        // If ticket is not valid, throw relevant exception with debug info.
+        if (!$this->isValidTicket($ticket)) {
+            throw (new ResponseMissingAuthTicket('Unable to parse valid auth ticket from service response', 0))
+                ->withDebug([
+                    'http_code' => $this->response->getStatusCode(),
+                    'content_type' => $this->response->getHeaderLine('Content-Type'),
+                    'body' => $this->getBody(),
+                    'ticket' => $ticket,
+                ]);
+        }
+
+        return $ticket;
     }
 
     /**
