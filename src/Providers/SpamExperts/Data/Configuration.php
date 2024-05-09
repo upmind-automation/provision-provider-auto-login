@@ -21,7 +21,6 @@ class Configuration extends DataSet
             'dashboard_url' => ['required', 'url', /* 'starts_with:https' */],
             'username' => ['required', 'string'],
             'password' => ['required', 'string'],
-            'debug' => ['boolean'],
         ]);
     }
 }

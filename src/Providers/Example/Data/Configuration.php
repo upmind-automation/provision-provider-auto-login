@@ -19,7 +19,6 @@ class Configuration extends DataSet
     {
         return new Rules([
             'api_token' => ['required', 'string'],
-            'debug' => ['boolean'],
         ]);
     }
 }
