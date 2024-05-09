@@ -4,7 +4,6 @@
 help:
 	@echo "Available commands:"
 	@echo "   make help                  : List all available Makefile commands"
-	@echo "   make setup-php74           : Start the dev environment with PHP 7.4"
 	@echo "   make setup-php81           : Start the dev environment with PHP 8.1"
 	@echo "   make setup-php82           : Start the dev environment with PHP 8.2"
 	@echo "   make setup-php83           : Start the dev environment with PHP 8.3"
@@ -15,9 +14,6 @@ help:
 	@echo "   make stop-containers       : Stop the dev environment"
 	@echo "   make kill-containers       : Stop and remove all containers"
 	@echo "   make composer-install      : Install composer dependencies"
-
-# Typing 'make setup-php74' will start the dev environment with PHP 7.4
-setup-php74: stop-containers --prep-dockerfile-php74 start-containers --remove-packages composer-install
 
 # Typing 'make setup-php81' will start the dev environment with PHP 8.1
 setup-php81: stop-containers --prep-dockerfile-php81 start-containers --remove-packages composer-install
@@ -55,10 +51,6 @@ kill-containers:
 # Install composer dependencies
 composer-install:
 	docker compose exec app composer install --no-interaction
-
-# Copy Dockerfile for PHP 7.4
---prep-dockerfile-php74: --remove-dockerfile --prep-docker-compose-file
-	cp "./.docker/Dockerfile.php74" "./.docker/Dockerfile"
 
 # Copy Dockerfile for PHP 8.1
 --prep-dockerfile-php81: --remove-dockerfile --prep-docker-compose-file
