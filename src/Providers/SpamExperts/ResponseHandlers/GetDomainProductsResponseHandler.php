@@ -4,24 +4,21 @@ declare(strict_types=1);
 
 namespace Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\ResponseHandlers;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Upmind\ProvisionProviders\AutoLogin\Exceptions\CannotParseResponse;
 use Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed;
-use Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\Exceptions\ResponseMissingAuthTicket;
-use Upmind\ProvisionProviders\AutoLogin\ResponseHandlers\AbstractHandler;
 
 /**
- * Handler to parse the 'Get Domain Products' result from from a PSR-7 response body.
+ * Handler to parse the 'Get Domain Products' result from a PSR-7 response body.
  */
 class GetDomainProductsResponseHandler extends ResponseHandler
 {
     /**
      * Extract enabled domain products from the response.
      *
-     * @throws OperationFailed If domain products be determined
-     *
      * @return string[] List of enabled domain products
+     *
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed If domain products be determined
      */
     public function getProducts(): array
     {
@@ -52,9 +49,7 @@ class GetDomainProductsResponseHandler extends ResponseHandler
     /**
      * Determine whether the given product list is valid.
      *
-     * @param string[]|null $productList
-     *
-     * @return bool
+     * @param string[]|mixed|null $productList
      */
     protected function isValidProductList($productList): bool
     {
