@@ -66,6 +66,9 @@ class Provider extends Category implements ProviderInterface
             ->setPackageIdentifier(implode(',', $this->getDomainProducts($domainName)));
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function login(AccountIdentifierParams $params): LoginResult
     {
         $domainName = $params->service_identifier ?: $params->username;
@@ -133,7 +136,8 @@ class Provider extends Category implements ProviderInterface
      * Set the enabled products on a domain.
      *
      * @param string $domain
-     * @param string|string[] $products Array or CSV of products to sync this domain to
+     * @param string|string[] $package Array or CSV of products to sync this domain to
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function setDomainProducts(string $domain, $package): void
     {
@@ -149,7 +153,7 @@ class Provider extends Category implements ProviderInterface
         ];
         $setProducts = [];
         foreach ($allProducts as $product) {
-            $setProducts[] = $product . '/' . intval(Str::contains($package, $product));
+            $setProducts[] = $product . '/' .(int) Str::contains($package, $product);
         }
 
         $response = $this->client()->post(
@@ -160,9 +164,10 @@ class Provider extends Category implements ProviderInterface
     }
 
     /**
-     * @param string $username Username or domain name
+     * @param  string  $username  Username or domain name
      *
      * @return string Login url
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function getLoginUrl(string $username): string
     {
