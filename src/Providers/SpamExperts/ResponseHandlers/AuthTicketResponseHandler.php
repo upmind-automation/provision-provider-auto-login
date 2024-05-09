@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\ResponseHandlers;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Upmind\ProvisionProviders\AutoLogin\Exceptions\CannotParseResponse;
 use Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\Exceptions\ResponseMissingAuthTicket;
-use Upmind\ProvisionProviders\AutoLogin\ResponseHandlers\AbstractHandler;
 
 /**
  * Handler to parse an auth ticket from a PSR-7 response body.
@@ -64,9 +62,7 @@ class AuthTicketResponseHandler extends ResponseHandler
     /**
      * Assert 'Add Domain' was successful.
      *
-     * @throws OperationFailed If "Add Domain" failed
-     *
-     * @return void
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed If "Add Domain" failed
      */
     public function assertSuccess(): void
     {
