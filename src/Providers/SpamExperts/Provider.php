@@ -153,7 +153,7 @@ class Provider extends Category implements ProviderInterface
         ];
         $setProducts = [];
         foreach ($allProducts as $product) {
-            $setProducts[] = $product . '/' .(int) Str::contains($package, $product);
+            $setProducts[] = $product . '/' . (int) Str::contains($package, $product);
         }
 
         $response = $this->client()->post(
