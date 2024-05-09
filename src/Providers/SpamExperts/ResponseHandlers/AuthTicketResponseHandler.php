@@ -70,16 +70,20 @@ class AuthTicketResponseHandler extends ResponseHandler
 
         $body = strtolower($this->getBody());
 
-        if (Str::startsWith($body, 'error:')) {
-            if (Str::containsAll($body, ['domain', 'not registered'])) {
-                throw new CannotParseResponse('Domain name doesn\'t exist');
-            }
-
-            if (Str::contains($body, 'no valid user')) {
-                throw new CannotParseResponse('Service account doesn\'t exist');
-            }
-
-            throw new CannotParseResponse('Failed to get domain name auth ticket');
+        // If no error in the body string, return without failure.
+        if (!Str::startsWith($body, 'error:')) {
+            return;
         }
+
+        // Otherwise, handle the error cases & message.
+        if (Str::containsAll($body, ['domain', 'not registered'])) {
+            throw new CannotParseResponse('Domain name doesn\'t exist');
+        }
+
+        if (Str::contains($body, 'no valid user')) {
+            throw new CannotParseResponse('Service account doesn\'t exist');
+        }
+
+        throw new CannotParseResponse('Failed to get domain name auth ticket');
     }
 }
