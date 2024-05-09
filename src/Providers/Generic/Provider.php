@@ -182,7 +182,7 @@ class Provider extends Category implements ProviderInterface
     {
         $options = [
             RequestOptions::HTTP_ERRORS => false,
-            'handler' => $this->getGuzzleHandlerStack(!!$this->configuration->debug),
+            'handler' => $this->getGuzzleHandlerStack(),
         ];
 
         if ($this->configuration->access_token) {
