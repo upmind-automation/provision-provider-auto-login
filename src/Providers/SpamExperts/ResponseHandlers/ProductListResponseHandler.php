@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\ResponseHandlers;
 
-use Illuminate\Support\Arr;
 use Upmind\ProvisionProviders\AutoLogin\Exceptions\CannotParseResponse;
 use Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed;
-use Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\Exceptions\ResponseMissingAuthTicket;
-use Upmind\ProvisionProviders\AutoLogin\ResponseHandlers\AbstractHandler;
 
 /**
  * Handler to parse product list from a PSR-7 response body.
@@ -42,7 +39,7 @@ class ProductListResponseHandler extends ResponseHandler
                     'http_code' => $this->response->getStatusCode(),
                     'content_type' => $this->response->getHeaderLine('Content-Type'),
                     'body' => $this->getBody(),
-                    'ticket' => $ticket ?? null,
+                    'ticket' => null,
                 ]);
         }
     }
