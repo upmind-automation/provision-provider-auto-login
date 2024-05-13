@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\Exceptions;
 
-use Throwable;
 use Upmind\ProvisionBase\Exception\ProvisionFunctionError;
 
 /**

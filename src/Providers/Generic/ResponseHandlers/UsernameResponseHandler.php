@@ -16,11 +16,10 @@ class UsernameResponseHandler extends AbstractHandler
     /**
      * Extract a username from the response.
      *
-     * @throws ResponseMissingUsername If username cannot be determined
-     *
      * @param string $property Name of the property containing the username
-     *
      * @return string Valid username
+     *
+     * @throws ResponseMissingUsername If username cannot be determined
      */
     public function getUsername(string $property = 'username')
     {

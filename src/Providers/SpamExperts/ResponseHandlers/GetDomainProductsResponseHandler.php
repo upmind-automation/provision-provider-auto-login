@@ -18,7 +18,7 @@ class GetDomainProductsResponseHandler extends ResponseHandler
      *
      * @return string[] List of enabled domain products
      *
-     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed If domain products be determined
+     * @throws OperationFailed If domain products be determined
      */
     public function getProducts(): array
     {

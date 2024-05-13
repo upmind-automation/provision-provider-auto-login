@@ -15,9 +15,9 @@ class ProductListResponseHandler extends ResponseHandler
     /**
      * Extract products list from the response.
      *
-     * @throws OperationFailed If auth ticket cannot be determined
-     *
      * @return string[] List of available products
+     *
+     * @throws OperationFailed If auth ticket cannot be determined
      */
     public function getProducts(): array
     {

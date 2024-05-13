@@ -43,13 +43,17 @@ class Provider extends Category implements ProviderInterface
         $this->configuration = $configuration;
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionBase\Exception\ProvisionFunctionError
+     */
     public function create(CreateParams $params): CreateResult
     {
         $domainName = $params->service_identifier;
         $package = $params->package_identifier;
 
         if (empty($domainName)) {
-            throw $this->errorResult('Domain name is required as service identifier');
+            $this->errorResult('Domain name is required as service identifier');
         }
 
         if (empty($package)) {
@@ -77,16 +81,26 @@ class Provider extends Category implements ProviderInterface
             ->setUrl($this->getLoginUrl($domainName));
     }
 
+    /**
+     * @throws \Upmind\ProvisionBase\Exception\ProvisionFunctionError
+     */
     public function suspend(AccountIdentifierParams $params): EmptyResult
     {
-        throw $this->errorResult('Operation not supported');
+        $this->errorResult('Operation not supported');
     }
 
+    /**
+     * @throws \Upmind\ProvisionBase\Exception\ProvisionFunctionError
+     */
     public function unsuspend(AccountIdentifierParams $params): EmptyResult
     {
-        throw $this->errorResult('Operation not supported');
+        $this->errorResult('Operation not supported');
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
+     */
     public function terminate(AccountIdentifierParams $params): EmptyResult
     {
         $domainName = $params->service_identifier ?: $params->username;
@@ -96,6 +110,10 @@ class Provider extends Category implements ProviderInterface
         return EmptyResult::create();
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
+     */
     protected function createDomain(string $domain): void
     {
         $response = $this->client()->post(sprintf('domain/add/domain/%s', $domain));
@@ -103,6 +121,10 @@ class Provider extends Category implements ProviderInterface
         $handler->assertSuccess();
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
+     */
     protected function removeDomain(string $domain): void
     {
         $response = $this->client()->post(sprintf('domain/remove/domain/%s', $domain));
@@ -112,6 +134,8 @@ class Provider extends Category implements ProviderInterface
 
     /**
      * @return string[]
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function getAvailableProducts(): array
     {
@@ -123,6 +147,8 @@ class Provider extends Category implements ProviderInterface
 
     /**
      * @return string[]
+     *
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     protected function getDomainProducts(string $domain): array
     {
@@ -138,6 +164,7 @@ class Provider extends Category implements ProviderInterface
      * @param string $domain
      * @param string|string[] $package Array or CSV of products to sync this domain to
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
      */
     protected function setDomainProducts(string $domain, $package): void
     {
@@ -168,6 +195,7 @@ class Provider extends Category implements ProviderInterface
      *
      * @return string Login url
      * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\Exceptions\ResponseMissingAuthTicket
      */
     protected function getLoginUrl(string $username): string
     {

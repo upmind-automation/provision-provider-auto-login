@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\ResponseHandlers;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Psr\Http\Message\ResponseInterface;
 use Upmind\ProvisionProviders\AutoLogin\Exceptions\CannotParseResponse;
-use Upmind\ProvisionProviders\AutoLogin\Exceptions\ServiceAuthenticationFailed;
 use Upmind\ProvisionProviders\AutoLogin\ResponseHandlers\AbstractHandler;
 
 /**
@@ -16,6 +13,9 @@ use Upmind\ProvisionProviders\AutoLogin\ResponseHandlers\AbstractHandler;
  */
 class ResponseHandler extends AbstractHandler
 {
+    /**
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\CannotParseResponse
+     */
     public function assertSuccess(): void
     {
         parent::assertSuccess();
