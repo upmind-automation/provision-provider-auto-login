@@ -13,6 +13,9 @@ use Upmind\ProvisionProviders\AutoLogin\ResponseHandlers\AbstractHandler;
  */
 class OperationResponseHandler extends AbstractHandler
 {
+    /**
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
+     */
     public function assertOperationSuccess(string $name = 'operation'): void
     {
         try {

@@ -4,12 +4,9 @@ declare(strict_types=1);
 
 namespace Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\ResponseHandlers;
 
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Upmind\ProvisionProviders\AutoLogin\Exceptions\CannotParseResponse;
 use Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed;
-use Upmind\ProvisionProviders\AutoLogin\Providers\SpamExperts\Exceptions\ResponseMissingAuthTicket;
-use Upmind\ProvisionProviders\AutoLogin\ResponseHandlers\AbstractHandler;
 
 /**
  * Handler to parse the 'Remove Domain' result from from a PSR-7 response body.
@@ -20,8 +17,6 @@ class RemoveDomainResponseHandler extends ResponseHandler
      * Assert 'Remove Domain' was successful.
      *
      * @throws OperationFailed If "Remove Domain" failed
-     *
-     * @return void
      */
     public function assertSuccess(): void
     {

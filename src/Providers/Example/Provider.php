@@ -21,7 +21,7 @@ use Upmind\ProvisionProviders\AutoLogin\Providers\Example\Data\Configuration;
 class Provider extends Category implements ProviderInterface
 {
     protected Configuration $configuration;
-    protected Client $client;
+    protected Client|null $client = null;
 
     public function __construct(Configuration $configuration)
     {
@@ -41,10 +41,12 @@ class Provider extends Category implements ProviderInterface
 
     /**
      * @inheritDoc
+     *
+     * @throws \Upmind\ProvisionBase\Exception\ProvisionFunctionError
      */
     public function create(CreateParams $params): CreateResult
     {
-        throw $this->errorResult('Not Implemented');
+        $this->errorResult('Not Implemented');
     }
 
     /**

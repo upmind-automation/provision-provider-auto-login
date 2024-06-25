@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Upmind\ProvisionProviders\AutoLogin\Providers\Generic\ResponseHandlers;
 
-use Illuminate\Support\Arr;
 use Upmind\ProvisionProviders\AutoLogin\Exceptions\CannotParseResponse;
 use Upmind\ProvisionProviders\AutoLogin\Providers\Generic\Exceptions\ResponseMissingUrl;
 use Upmind\ProvisionProviders\AutoLogin\ResponseHandlers\AbstractHandler;
@@ -17,11 +16,10 @@ class UrlResponseHandler extends AbstractHandler
     /**
      * Extract a URL from the response.
      *
-     * @throws ResponseMissingUrl If URL cannot be determined
-     *
-     * @param string $property Name of the property containing the URL
-     *
+     * @param string|null $property Name of the property containing the URL
      * @return string Valid URL
+     *
+     * @throws ResponseMissingUrl If URL cannot be determined
      */
     public function getUrl(?string $property = 'url'): string
     {
@@ -59,8 +57,6 @@ class UrlResponseHandler extends AbstractHandler
      * host and one or more of: path, query & fragment.
      *
      * @param string|null $url
-     *
-     * @return bool
      */
     protected function isValidUrl($url): bool
     {

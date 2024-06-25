@@ -42,6 +42,10 @@ class Provider extends Category implements ProviderInterface
         $this->configuration = $configuration;
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Providers\Generic\Exceptions\ResponseMissingUrl
+     */
     public function login(AccountIdentifierParams $params): LoginResult
     {
         $method = strtoupper($this->configuration->login_endpoint_http_method);
@@ -68,10 +72,15 @@ class Provider extends Category implements ProviderInterface
             ->setUrl($handler->getUrl());
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionBase\Exception\ProvisionFunctionError
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Providers\Generic\Exceptions\ResponseMissingUsername
+     */
     public function create(CreateParams $params): CreateResult
     {
         if (!$this->configuration->has_create) {
-            return $this->errorResult('No create endpoint set in this configuration');
+            $this->errorResult('No create endpoint set in this configuration');
         }
 
         $method = strtoupper($this->configuration->create_endpoint_http_method);
@@ -97,10 +106,15 @@ class Provider extends Category implements ProviderInterface
             ->setPackageIdentifier($handler->getPackageIdentifier() ?? $params->package_identifier);
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionBase\Exception\ProvisionFunctionError
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
+     */
     public function suspend(AccountIdentifierParams $params): EmptyResult
     {
         if (!$this->configuration->has_suspend) {
-            return $this->errorResult('No suspend endpoint set in this configuration');
+            $this->errorResult('No suspend endpoint set in this configuration');
         }
 
         $method = strtoupper($this->configuration->suspend_endpoint_http_method);
@@ -124,10 +138,15 @@ class Provider extends Category implements ProviderInterface
         return EmptyResult::create()->setMessage('Account suspended');
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionBase\Exception\ProvisionFunctionError
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
+     */
     public function unsuspend(AccountIdentifierParams $params): EmptyResult
     {
         if (!$this->configuration->has_suspend) {
-            return $this->errorResult('No unsuspend endpoint set in this configuration');
+            $this->errorResult('No unsuspend endpoint set in this configuration');
         }
 
         $method = strtoupper($this->configuration->unsuspend_endpoint_http_method);
@@ -151,10 +170,15 @@ class Provider extends Category implements ProviderInterface
         return EmptyResult::create()->setMessage('Account unsuspended');
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionBase\Exception\ProvisionFunctionError
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
+     */
     public function terminate(AccountIdentifierParams $params): EmptyResult
     {
         if (!$this->configuration->has_terminate) {
-            return $this->errorResult('No terminate endpoint set in this configuration');
+            $this->errorResult('No terminate endpoint set in this configuration');
         }
 
         $method = strtoupper($this->configuration->terminate_endpoint_http_method);

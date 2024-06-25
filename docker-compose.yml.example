@@ -2,23 +2,22 @@ version: '3.3'
 services:
 
   #PHP Service
-  app:
+  provision-provider-auto-login:
     build:
       context: .
       dockerfile: ./.docker/Dockerfile
-    container_name: app
-    restart: unless-stopped
+    container_name: provision-provider-auto-login
     tty: true
     environment:
-      SERVICE_NAME: app
+      SERVICE_NAME: provision-provider-auto-login
       SERVICE_TAGS: dev
     working_dir: /usr/src/lib
     volumes:
       - ./:/usr/src/lib
     networks:
-      - app-network
+      - provision-provider-auto-login-network
 
 #Docker Networks
 networks:
-  app-network:
+  provision-provider-auto-login-network:
     driver: bridge
