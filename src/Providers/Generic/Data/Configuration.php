@@ -22,6 +22,13 @@ use Upmind\ProvisionBase\Provider\DataSet\Rules;
  * @property-read boolean $has_terminate Whether or not this configuration has a terminate endpoint
  * @property-read string|null $terminate_endpoint_url Endpoint which terminates a service account
  * @property-read string|null $terminate_endpoint_http_method HTTP method to use for the terminate endpoint
+ * @property-read boolean $skip_ssl_verification Whether or not to allow invalid SSL certificates
+ * @property-read string|null $extra_data_1 Extra data field 1
+ * @property-read string|null $extra_data_2 Extra data field 2
+ * @property-read string|null $extra_data_3 Extra data field 3
+ * @property-read string|null $extra_secret_1 Extra secret field 1
+ * @property-read string|null $extra_secret_2 Extra secret field 2
+ * @property-read string|null $extra_secret_3 Extra secret field 3
  */
 class Configuration extends DataSet
 {
@@ -42,6 +49,13 @@ class Configuration extends DataSet
             'has_terminate' => ['boolean'],
             'terminate_endpoint_http_method' => ['required_if:has_terminate,1', 'string', 'in:post,put,patch,get,delete'],
             'terminate_endpoint_url' => ['required_if:has_terminate,1', 'url'],
+            'skip_ssl_verification' => ['boolean'],
+            'extra_data_1' => ['nullable', 'string'],
+            'extra_data_2' => ['nullable', 'string'],
+            'extra_data_3' => ['nullable', 'string'],
+            'extra_secret_1' => ['nullable', 'string'],
+            'extra_secret_2' => ['nullable', 'string'],
+            'extra_secret_3' => ['nullable', 'string'],
         ]);
     }
 }

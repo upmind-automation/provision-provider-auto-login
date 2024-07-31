@@ -59,10 +59,16 @@ class Provider extends Category implements ProviderInterface
             ];
         }
 
+        $requestParams = $params->toArray();
+        $requestParams = array_merge($requestParams, Arr::pull($requestParams, 'extra') ?? []); // merge extra params
+        if ($extraParams = $this->getExtraConfigurationParams()) {
+            $requestParams['configuration_extra'] = $extraParams;
+        }
+
         if ($method === 'GET') {
-            $options[RequestOptions::QUERY] = $params->toArray();
+            $options[RequestOptions::QUERY] = $requestParams;
         } else {
-            $options[RequestOptions::FORM_PARAMS] = $params->toArray();
+            $options[RequestOptions::FORM_PARAMS] = $requestParams;
         }
 
         $response = $this->client()->request($method, $endpointUrl, $options);
@@ -87,7 +93,10 @@ class Provider extends Category implements ProviderInterface
         $endpointUrl = $this->configuration->create_endpoint_url;
 
         $requestParams = $params->toArray();
-        $requestParams = array_merge($requestParams, Arr::pull($requestParams, 'extra', [])); // merge extra params
+        $requestParams = array_merge($requestParams, Arr::pull($requestParams, 'extra') ?? []); // merge extra params
+        if ($extraParams = $this->getExtraConfigurationParams()) {
+            $requestParams['configuration_extra'] = $extraParams;
+        }
 
         $options = [];
 
@@ -122,6 +131,9 @@ class Provider extends Category implements ProviderInterface
 
         $requestParams = $params->toArray();
         $requestParams = array_merge($requestParams, Arr::pull($requestParams, 'extra') ?? []); // merge extra params
+        if ($extraParams = $this->getExtraConfigurationParams()) {
+            $requestParams['configuration_extra'] = $extraParams;
+        }
 
         $options = [];
 
@@ -154,6 +166,9 @@ class Provider extends Category implements ProviderInterface
 
         $requestParams = $params->toArray();
         $requestParams = array_merge($requestParams, Arr::pull($requestParams, 'extra') ?? []); // merge extra params
+        if ($extraParams = $this->getExtraConfigurationParams()) {
+            $requestParams['configuration_extra'] = $extraParams;
+        }
 
         $options = [];
 
@@ -186,6 +201,9 @@ class Provider extends Category implements ProviderInterface
 
         $requestParams = $params->toArray();
         $requestParams = array_merge($requestParams, Arr::pull($requestParams, 'extra') ?? []); // merge extra params
+        if ($extraParams = $this->getExtraConfigurationParams()) {
+            $requestParams['configuration_extra'] = $extraParams;
+        }
 
         $options = [];
 
@@ -202,6 +220,26 @@ class Provider extends Category implements ProviderInterface
         return EmptyResult::create()->setMessage('Account terminated');
     }
 
+    protected function getExtraConfigurationParams(): array
+    {
+        $extraParams = [];
+
+        for ($i = 1; $i <= 3; $i++) {
+            $extraData = $this->configuration->{"extra_data_{$i}"};
+            $extraSecret = $this->configuration->{"extra_secret_{$i}"};
+
+            if ($extraData) {
+                $extraParams["data_{$i}"] = $extraData;
+            }
+
+            if ($extraSecret) {
+                $extraParams["secret_{$i}"] = $extraSecret;
+            }
+        }
+
+        return $extraParams;
+    }
+
     protected function client(): Client
     {
         $options = [
@@ -213,6 +251,10 @@ class Provider extends Category implements ProviderInterface
             $options[RequestOptions::HEADERS] = [
                 'Authorization' => sprintf('Bearer %s', $this->configuration->access_token),
             ];
+        }
+
+        if ($this->configuration->skip_ssl_verification !== null) {
+            $options[RequestOptions::VERIFY] = !$this->configuration->skip_ssl_verification;
         }
 
         return new Client($options);
