@@ -2,10 +2,24 @@
 
 All notable changes to the package will be documented in this file.
 
+## [v5.2.1](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.2.1) - 2024-07-31
+
+- Update Generic provider
+  - Add `skip_ssl_verification` configuration param
+  - Add `extra_data_N` configuration params which get passed in requests as `configuration_extra.data_N`
+  - Ensure `extra` params are always merged into request parameters
+
 ## [v5.2.0](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.2.0) - 2024-05-09
 
 - Update for PHP 8.1+ and base library v4
 - Add static analyser and docker environment
+
+## [v5.1.4](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1.4) - 2024-07-31
+
+- Update Generic provider
+  - Add `skip_ssl_verification` configuration param
+  - Add `extra_data_N` configuration params which get passed in requests as `configuration_extra.data_N`
+  - Ensure `extra` params are always merged into request parameters
 
 ## [v5.1.3](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1.3) - 2024-04-29
 
