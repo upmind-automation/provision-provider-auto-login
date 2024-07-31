@@ -2,6 +2,13 @@
 
 All notable changes to the package will be documented in this file.
 
+## [v5.1.4](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1.4) - 2024-07-31
+
+- Update Generic provider
+  - Add `skip_ssl_verification` configuration param
+  - Add `extra_data_N` configuration params which get passed in requests as `configuration_extra.data_N`
+  - Ensure `extra` params are always merged into request parameters
+
 ## [v5.1.3](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1.3) - 2024-04-29
 
 - Throw an explicit error if domain name is not passed as service identifier in SpamExperts create()
