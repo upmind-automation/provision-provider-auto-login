@@ -2,6 +2,10 @@
 
 All notable changes to the package will be documented in this file.
 
+## [v5.1.5](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1.5) - 2024-09-19
+
+- Update Generic provider UsernameResponseHandler to always cast return data to strings
+
 ## [v5.1.4](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1.4) - 2024-07-31
 
 - Update Generic provider
