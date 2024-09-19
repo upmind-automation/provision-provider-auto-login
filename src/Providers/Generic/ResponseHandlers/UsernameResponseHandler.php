@@ -21,7 +21,7 @@ class UsernameResponseHandler extends AbstractHandler
      *
      * @throws ResponseMissingUsername If username cannot be determined
      */
-    public function getUsername(string $property = 'username')
+    public function getUsername(string $property = 'username'): string
     {
         try {
             $username = $this->getData($property);
@@ -32,7 +32,7 @@ class UsernameResponseHandler extends AbstractHandler
                 );
             }
 
-            return $username;
+            return (string)$username;
         } catch (CannotParseResponse $e) {
             throw (new ResponseMissingUsername($e->getMessage(), 0, $e))
                 ->withDebug([
@@ -44,13 +44,15 @@ class UsernameResponseHandler extends AbstractHandler
         }
     }
 
-    public function getServiceIdentifier()
+    public function getServiceIdentifier(): ?string
     {
-        return $this->getData('service_identifier');
+        $data = $this->getData('service_identifier');
+        return !empty($data) ? (string)$data : null;
     }
 
-    public function getPackageIdentifier()
+    public function getPackageIdentifier(): ?string
     {
-        return $this->getData('package_identifier');
+        $data = $this->getData('package_identifier');
+        return !empty($data) ? (string)$data : null;
     }
 }
