@@ -161,11 +161,51 @@ class Provider extends Category implements ProviderInterface
 
         $response = $this->client()->request($method, $endpointUrl, $options);
         $handler = new OperationResponseHandler($response);
-        $handler->assertOperationSuccess('suspend');
+        $handler->assertOperationSuccess('unsuspend');
 
         return EmptyResult::create()->setMessage('Account unsuspended');
     }
 
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionBase\Exception\ProvisionFunctionError
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
+     */
+    public function changePackage(AccountIdentifierParams $params): EmptyResult
+    {
+        if (!$this->configuration->has_change_package) {
+            $this->errorResult('No changePackage endpoint set in this configuration');
+        }
+
+        $method = strtoupper($this->configuration->change_package_endpoint_http_method);
+        $endpointUrl = $this->configuration->change_package_endpoint_url;
+
+        $requestParams = $params->toArray();
+        $requestParams = array_merge($requestParams, Arr::pull($requestParams, 'extra') ?? []); // merge extra params
+        if ($extraParams = $this->getExtraConfigurationParams()) {
+            $requestParams['configuration_extra'] = $extraParams;
+        }
+
+        $options = [];
+
+        if ($method === 'GET') {
+            $options[RequestOptions::QUERY] = $requestParams;
+        } else {
+            $options[RequestOptions::FORM_PARAMS] = $requestParams;
+        }
+
+        $response = $this->client()->request($method, $endpointUrl, $options);
+        $handler = new OperationResponseHandler($response);
+        $handler->assertOperationSuccess('change package');
+
+        return EmptyResult::create()->setMessage('Account package changed');
+    }
+
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionBase\Exception\ProvisionFunctionError
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
+     */
     public function terminate(AccountIdentifierParams $params): EmptyResult
     {
         if (!$this->configuration->has_terminate) {
