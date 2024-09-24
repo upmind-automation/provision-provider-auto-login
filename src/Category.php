@@ -49,6 +49,11 @@ abstract class Category extends BaseCategory
     abstract public function unsuspend(AccountIdentifierParams $params): EmptyResult;
 
     /**
+     * Change the package of an account.
+     */
+    abstract public function changePackage(AccountIdentifierParams $params): EmptyResult;
+
+    /**
      * Permanently delete an account.
      */
     abstract public function terminate(AccountIdentifierParams $params): EmptyResult;

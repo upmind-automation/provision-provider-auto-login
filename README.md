@@ -47,6 +47,7 @@ The following providers are currently implemented:
 | create() | [_CreateParams_](src/Data/CreateParams.php) | [_CreateResult_](src/Data/CreateResult.php) | Creates an account and returns the `username` which can be used to identify the account in subsequent requests, plus other account information |
 | suspend() | [_AccountIdentifierParams_](src/Data/AccountIdentifierParams.php) | [_EmptyResult_](src/Data/EmptyResult.php) | Suspend an account |
 | unsuspend() | [_AccountIdentifierParams_](src/Data/AccountIdentifierParams.php) | [_EmptyResult_](src/Data/EmptyResult.php) | Unsuspend an account |
+| changePackage() | [_AccountIdentifierParams_](src/Data/AccountIdentifierParams.php) | [_EmptyResult_](src/Data/EmptyResult.php) | Change the package of an account |
 | terminate() | [_AccountIdentifierParams_](src/Data/AccountIdentifierParams.php) | [_EmptyResult_](src/Data/EmptyResult.php) | Permanently delete an account |
 
 ## Changelog

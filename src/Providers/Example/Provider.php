@@ -82,6 +82,15 @@ class Provider extends Category implements ProviderInterface
     /**
      * @inheritDoc
      */
+    public function changePackage(AccountIdentifierParams $params): EmptyResult
+    {
+        return EmptyResult::create()
+            ->setMessage('Account unsuspended');
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function terminate(AccountIdentifierParams $params): EmptyResult
     {
         return EmptyResult::create()

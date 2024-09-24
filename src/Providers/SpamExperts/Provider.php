@@ -98,6 +98,14 @@ class Provider extends Category implements ProviderInterface
     }
 
     /**
+     * @throws \Upmind\ProvisionBase\Exception\ProvisionFunctionError
+     */
+    public function changePackage(AccountIdentifierParams $params): EmptyResult
+    {
+        $this->errorResult('Operation not supported');
+    }
+
+    /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
      */
