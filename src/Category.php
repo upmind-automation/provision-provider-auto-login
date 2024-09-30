@@ -54,6 +54,11 @@ abstract class Category extends BaseCategory
     abstract public function changePackage(AccountIdentifierParams $params): EmptyResult;
 
     /**
+     * Renew an account's service.
+     */
+    abstract public function renew(AccountIdentifierParams $params): EmptyResult;
+
+    /**
      * Permanently delete an account.
      */
     abstract public function terminate(AccountIdentifierParams $params): EmptyResult;

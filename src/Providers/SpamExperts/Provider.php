@@ -106,6 +106,14 @@ class Provider extends Category implements ProviderInterface
     }
 
     /**
+     * @inheritDoc
+     */
+    public function renew(AccountIdentifierParams $params): EmptyResult
+    {
+        $this->errorResult('Operation not supported');
+    }
+
+    /**
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
      */
