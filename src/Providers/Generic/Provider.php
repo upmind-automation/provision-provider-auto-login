@@ -206,6 +206,41 @@ class Provider extends Category implements ProviderInterface
      * @throws \Upmind\ProvisionBase\Exception\ProvisionFunctionError
      * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
      */
+    public function renew(AccountIdentifierParams $params): EmptyResult
+    {
+        if (!$this->configuration->has_renew) {
+            $this->errorResult('No renew endpoint set in this configuration');
+        }
+
+        $method = strtoupper($this->configuration->renew_endpoint_http_method);
+        $endpointUrl = $this->configuration->renew_endpoint_url;
+
+        $requestParams = $params->toArray();
+        $requestParams = array_merge($requestParams, Arr::pull($requestParams, 'extra') ?? []); // merge extra params
+        if ($extraParams = $this->getExtraConfigurationParams()) {
+            $requestParams['configuration_extra'] = $extraParams;
+        }
+
+        $options = [];
+
+        if ($method === 'GET') {
+            $options[RequestOptions::QUERY] = $requestParams;
+        } else {
+            $options[RequestOptions::FORM_PARAMS] = $requestParams;
+        }
+
+        $response = $this->client()->request($method, $endpointUrl, $options);
+        $handler = new OperationResponseHandler($response);
+        $handler->assertOperationSuccess('renew');
+
+        return EmptyResult::create()->setMessage('Account renewed');
+    }
+
+    /**
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \Upmind\ProvisionBase\Exception\ProvisionFunctionError
+     * @throws \Upmind\ProvisionProviders\AutoLogin\Exceptions\OperationFailed
+     */
     public function terminate(AccountIdentifierParams $params): EmptyResult
     {
         if (!$this->configuration->has_terminate) {

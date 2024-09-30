@@ -89,6 +89,15 @@ class Provider extends Category implements ProviderInterface
     /**
      * @inheritDoc
      */
+    public function renew(AccountIdentifierParams $params): EmptyResult
+    {
+        return EmptyResult::create()
+            ->setMessage('Account renewed');
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function terminate(AccountIdentifierParams $params): EmptyResult
     {
         return EmptyResult::create()

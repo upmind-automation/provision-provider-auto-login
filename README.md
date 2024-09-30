@@ -48,6 +48,7 @@ The following providers are currently implemented:
 | suspend() | [_AccountIdentifierParams_](src/Data/AccountIdentifierParams.php) | [_EmptyResult_](src/Data/EmptyResult.php) | Suspend an account |
 | unsuspend() | [_AccountIdentifierParams_](src/Data/AccountIdentifierParams.php) | [_EmptyResult_](src/Data/EmptyResult.php) | Unsuspend an account |
 | changePackage() | [_AccountIdentifierParams_](src/Data/AccountIdentifierParams.php) | [_EmptyResult_](src/Data/EmptyResult.php) | Change the package of an account |
+| renew() | [_AccountIdentifierParams_](src/Data/AccountIdentifierParams.php) | [_EmptyResult_](src/Data/EmptyResult.php) | Renew an account's service |
 | terminate() | [_AccountIdentifierParams_](src/Data/AccountIdentifierParams.php) | [_EmptyResult_](src/Data/EmptyResult.php) | Permanently delete an account |
 
 ## Changelog
