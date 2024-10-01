@@ -2,6 +2,11 @@
 
 All notable changes to the package will be documented in this file.
 
+## [v5.3.0](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.3.0) - 2024-10-01
+
+- Add changePackage() function
+- Add renew() function
+
 ## [v5.2.2](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.2.2) - 2024-09-19
 
 - Update Generic provider UsernameResponseHandler to always cast return data to strings
@@ -17,6 +22,11 @@ All notable changes to the package will be documented in this file.
 
 - Update for PHP 8.1+ and base library v4
 - Add static analyser and docker environment
+
+## [v5.1.6](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1.6) - 2024-10-01
+
+- Add changePackage() function
+- Add renew() function
 
 ## [v5.1.5](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1.5) - 2024-09-19
 
