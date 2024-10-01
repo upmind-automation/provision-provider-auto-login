@@ -22,6 +22,9 @@ use Upmind\ProvisionBase\Provider\DataSet\Rules;
  * @property-read boolean $has_change_package Whether or not this configuration has a change package endpoint
  * @property-read string|null $change_package_endpoint_url Endpoint which changes the package of a service account
  * @property-read string|null $change_package_endpoint_http_method HTTP method to use for the change package endpoint
+ * @property-read boolean $has_renew Whether or not this configuration has a renew endpoint
+ * @property-read string|null $renew_endpoint_url Endpoint which renews a service account
+ * @property-read string|null $renew_endpoint_http_method HTTP method to use for the renew endpoint
  * @property-read boolean $has_terminate Whether or not this configuration has a terminate endpoint
  * @property-read string|null $terminate_endpoint_url Endpoint which terminates a service account
  * @property-read string|null $terminate_endpoint_http_method HTTP method to use for the terminate endpoint
@@ -52,6 +55,9 @@ class Configuration extends DataSet
             'has_change_package' => ['boolean'],
             'change_package_endpoint_http_method' => ['required_if:has_change_package,1', 'string', 'in:post,put,patch,get,delete'],
             'change_package_endpoint_url' => ['required_if:has_change_package,1', 'url'],
+            'has_renew' => ['boolean'],
+            'renew_endpoint_http_method' => ['required_if:has_renew,1', 'string', 'in:post,put,patch,get,delete'],
+            'renew_endpoint_url' => ['required_if:has_renew,1', 'url'],
             'has_terminate' => ['boolean'],
             'terminate_endpoint_http_method' => ['required_if:has_terminate,1', 'string', 'in:post,put,patch,get,delete'],
             'terminate_endpoint_url' => ['required_if:has_terminate,1', 'url'],
