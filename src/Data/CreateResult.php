@@ -11,6 +11,7 @@ use Upmind\ProvisionBase\Provider\DataSet\Rules;
  * @property-read mixed $username Username or other unique service identifier
  * @property-read string|null $service_identifier Secondary service identifier, if any
  * @property-read string|null $package_identifier Service package identifier, if any
+ * @property-read array|null $extra Extra data, if any
  */
 class CreateResult extends ResultData
 {
@@ -20,6 +21,7 @@ class CreateResult extends ResultData
             'username' => ['filled'],
             'service_identifier' => ['nullable', 'string'],
             'package_identifier' => ['nullable', 'string'],
+            'extra' => ['nullable', 'array'],
         ]);
     }
 
@@ -47,6 +49,15 @@ class CreateResult extends ResultData
     public function setPackageIdentifier(?string $packageIdentifier): self
     {
         $this->setValue('package_identifier', $packageIdentifier);
+        return $this;
+    }
+
+    /**
+     * Set the result extra data.
+     */
+    public function setExtra(?array $extra): self
+    {
+        $this->setValue('extra', $extra);
         return $this;
     }
 }
