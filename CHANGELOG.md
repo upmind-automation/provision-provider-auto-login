@@ -2,6 +2,10 @@
 
 All notable changes to the package will be documented in this file.
 
+## [v5.1.7](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1.7) - 2024-10-17
+
+- Add optional `extra` array to CreateResult
+
 ## [v5.1.6](https://github.com/upmind-automation/provision-provider-auto-login/releases/tag/v5.1.6) - 2024-10-01
 
 - Add changePackage() function
